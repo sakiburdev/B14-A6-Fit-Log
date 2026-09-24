@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Oswald, Inter } from "next/font/google";
-
+import Navbar from "@/components/shared/Navbar";
+import { PlanProvider } from "@/context/PlanContext";
 
 const oswald = Oswald({
   variable: "--font-oswald",
@@ -23,11 +24,21 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      data-theme="dark"
       className={`${oswald.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="font-sans min-h-full flex flex-col bg-[#0C0D10] ">
-        {children}
+
+      <body className="font-sans min-h-full flex flex-col bg-[#0C0D10]">
+        
+        <PlanProvider>
+          {/* Global Navbar */}
+          <Navbar />
+
+          {/* Main Content */}
+          <main className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            {children}
+          </main>
+        </PlanProvider>
+
       </body>
     </html>
   );
