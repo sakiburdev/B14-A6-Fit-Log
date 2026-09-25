@@ -3,6 +3,15 @@ import Link from "next/link";
 import heroImg from "@/assets/banner.png";
 
 const Banner = () => {
+
+const handleScrollToLibrary = (e) => {
+    e.preventDefault();
+    const section = document.getElementById("library");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="w-full mb-10">
       <div className="container mx-auto bg-[#1A1D24] border border-[#1F2937]/50 rounded-[16px] px-6 py-8 sm:px-10 sm:py-12 lg:px-16 lg:py-16 flex flex-col-reverse lg:flex-row items-center justify-between gap-10">

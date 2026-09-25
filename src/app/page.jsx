@@ -1,9 +1,13 @@
 import Banner from "@/components/homepage/Banner";
 
-export default function Home() {
+
+export default  function HomePage() {
+  
+
   return (
-    <div>
+    <div className="py-6">
       <Banner/>
+     
     </div>
   );
 }
