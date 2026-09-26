@@ -1,4 +1,5 @@
 import Banner from "@/components/homepage/Banner";
+import WorkoutLibrary from "@/components/homepage/WorkoutLibrary";
 
 async function getWorkouts() {
   try {
@@ -14,14 +15,13 @@ async function getWorkouts() {
   }
 }
 
-
 export default async function HomePage() {
   const workouts = await getWorkouts();
 
   return (
     <div className="py-6">
       <Banner/>
-      
+      <WorkoutLibrary initialWorkouts={workouts} />
     </div>
   );
 }
