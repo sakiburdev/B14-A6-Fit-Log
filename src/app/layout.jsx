@@ -4,7 +4,7 @@ import Navbar from "@/components/shared/Navbar";
 import { PlanProvider } from "@/context/PlanContext";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-
+import Footer from "@/components/shared/Footer";
 
 const oswald = Oswald({
   variable: "--font-oswald",
@@ -29,9 +29,7 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${oswald.variable} ${inter.variable} h-full antialiased`}
     >
-
       <body className="font-sans min-h-full flex flex-col bg-[#0C0D10]">
-        
         <PlanProvider>
           {/* Global Navbar */}
           <Navbar />
@@ -42,14 +40,10 @@ export default function RootLayout({ children }) {
           </main>
 
           {/* toast add */}
-          <ToastContainer
-            position="bottom-right"
-            autoClose={2500}
-            theme="dark"
-          />
+          <ToastContainer position="top-right" autoClose={2500} theme="dark" />
         </PlanProvider>
-         
 
+        <Footer />
       </body>
     </html>
   );
