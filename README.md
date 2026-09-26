@@ -1,3 +1,28 @@
+# FitLog — Modern Workout & Fitness Tracker
+
+Description: FitLog is a dynamic, high-performance web application designed to help users discover, track, and manage their daily fitness routines effortlessly. Built with modern web technologies, it offers an intuitive dark-themed interface, seamless exercise organization, and real-time planning capabilities.
+
+## 🛠️ Technologies Used
+- **Framework:** Next.js (App Router)
+- **Frontend Library:** React.js
+- **Styling:** Tailwind CSS and daisyUI
+- **Icons:** React Icons (`react-icons/lu`)
+- **Notifications:** React Toastify
+- **Data Fetching:** Native Fetch API / REST API
+- **Deployment:** Vercel
+
+## ✨ Key Features
+1. **Comprehensive Workout Details:** View detailed exercise specifications, including target muscle groups, required equipment, difficulty levels, sets, reps, duration, and calories burned.
+2. **Interactive Plan Management:** Effortlessly add exercises to your daily workout plan with real-time feedback using custom toast notifications.
+3. **Save for Later:** Bookmark your favorite workouts to access them later for quick planning and inspiration.
+4. **Step-by-Step Exercise Guides:** Clear, structured, and easy-to-follow instructional steps for maintaining proper form during workouts.
+5. **Responsive Dark UI:** Designed with a modern, sleek dark theme fully optimized for all device sizes, from mobile screens to desktop displays.
+
+
+
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
