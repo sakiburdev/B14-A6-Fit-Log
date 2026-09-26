@@ -1,10 +1,14 @@
 import "./globals.css";
+
 import { Oswald, Inter } from "next/font/google";
+
 import Navbar from "@/components/shared/Navbar";
+import Footer from "@/components/shared/Footer";
+
 import { PlanProvider } from "@/context/PlanContext";
+
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import Footer from "@/components/shared/Footer";
 
 const oswald = Oswald({
   variable: "--font-oswald",
@@ -29,20 +33,25 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${oswald.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="font-sans min-h-full flex flex-col bg-[#0C0D10]">
+      <body className="flex min-h-full flex-col bg-[#0C0D10] font-sans">
         <PlanProvider>
           {/* Global Navbar */}
           <Navbar />
 
           {/* Main Content */}
-          <main className="flex-1 container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <main className="container mx-auto flex-1 px-4 py-6 sm:px-6 lg:px-8">
             {children}
           </main>
 
-          {/* toast add */}
-          <ToastContainer position="top-right" autoClose={2500} theme="dark" />
+          {/* Toast */}
+          <ToastContainer
+            position="top-right"
+            autoClose={2500}
+            theme="dark"
+          />
         </PlanProvider>
 
+        {/* Global Footer */}
         <Footer />
       </body>
     </html>
