@@ -1,96 +1,138 @@
 "use client";
-
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { usePlan } from "@/context/PlanContext";
 import logoImg from "@/assets/logo.png";
 
 const Navbar = () => {
   const pathname = usePathname();
-  const context = usePlan();
-  const [isMounted, setIsMounted] = useState(false);
+  const { todayPlan = [], savedPlan = [] } = usePlan();
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  const todayPlan = context?.todayPlan || [];
-  const savedPlan = context?.savedPlan || [];
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const isWorkoutsActive = pathname === "/";
   const isMyPlanActive = pathname === "/my-plan";
 
   return (
-    <header className="bg-[#0D0F12] border-b border-[#1C1F26] shadow-xl sticky top-0 z-50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Left side: Logo */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <Image
-            src={logoImg}
-            alt="Fit-log Logo"
-            width={24}
-            height={24}
-            className="w-6 h-6 object-contain"
-          />
-          <span className="font-sans font-black text-white text-[18px] tracking-tight group-hover:text-[#C2F800] transition-colors">
-            FITLOG
-          </span>
-        </Link>
+    <header className="sticky top-0 z-50 border-b border-[#1C1F26] bg-[#0D0F12] shadow-xl">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
 
-        {/* Navigation Links */}
-        <ul className="flex items-center gap-2 sm:gap-6 font-inter">
-          <li>
-            <Link
-              href="/"
-              className={`text-[12px] px-3.5 py-1.5 rounded-full transition-all duration-200 ${
-                isWorkoutsActive
-                  ? "font-semibold text-[#C2F800] bg-[#1A2208] border border-[#C2F800]/20"
-                  : "font-normal text-[#9CA3AF] hover:text-white hover:bg-[#111317]"
-              }`}
-            >
-              Workouts
-            </Link>
-          </li>
+        {/* Left Side */}
+        <div className="flex items-center gap-3">
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="text-xl text-white lg:hidden"
+            aria-label="Toggle menu"
+          >
+            {menuOpen ? "✕" : "☰"}
+          </button>
 
-          <li>
-            <Link
-              href="/my-plan"
-              className={`text-[12px] px-3.5 py-1.5 rounded-full transition-all duration-200 ${
-                isMyPlanActive
-                  ? "font-semibold text-[#C2F800] bg-[#1A2208] border border-[#C2F800]/20"
-                  : "font-normal text-[#9CA3AF] hover:text-white hover:bg-[#111317]"
-              }`}
-            >
-              My Plan
-            </Link>
-          </li>
-        </ul>
+          {/* Logo */}
+          <Link href="/" className="group flex items-center gap-2">
+            <Image
+              src={logoImg}
+              alt="Fit-log Logo"
+              width={24}
+              height={24}
+              className="h-6 w-6 object-contain"
+            />
 
-        {/* Right side Badges */}
-        <div className="flex items-center gap-1 sm:gap-3 text-[12px] font-inter">
+            <span className="font-sans text-[17px] font-black tracking-tight text-white transition-colors group-hover:text-[#C2F800] sm:text-[18px]">
+              FITLOG
+            </span>
+          </Link>
+        </div>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:block">
+          <ul className="flex items-center gap-3 font-inter">
+            <li>
+              <Link
+                href="/"
+                className={`block rounded-full px-3.5 py-1.5 text-[12px] transition-colors ${
+                  isWorkoutsActive
+                    ? "border border-[#C2F800]/20 bg-[#1A2208] font-semibold text-[#C2F800]"
+                    : "text-[#9CA3AF] hover:bg-[#111317] hover:text-white"
+                }`}
+              >
+                Workouts
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                href="/my-plan"
+                className={`block rounded-full px-3.5 py-1.5 text-[12px] transition-colors ${
+                  isMyPlanActive
+                    ? "border border-[#C2F800]/20 bg-[#1A2208] font-semibold text-[#C2F800]"
+                    : "text-[#9CA3AF] hover:bg-[#111317] hover:text-white"
+                }`}
+              >
+                My Plan
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* Plan & Saved */}
+        <div className="flex items-center gap-1 font-inter text-[11px] sm:gap-2 sm:text-[12px]">
           <Link
             href="/my-plan"
-            className="flex items-center gap-1.5 text-[#9CA3AF] hover:text-white transition-colors cursor-pointer py-1 px-2 rounded-md hover:bg-[#111317]"
+            className="flex items-center gap-1 rounded-md px-1.5 py-1 text-[#9CA3AF] transition-colors hover:bg-[#111317] hover:text-white sm:gap-1.5 sm:px-2"
           >
             <span>Plan</span>
-            <span className="w-5 h-5 rounded-full bg-[#C2F800] text-black font-bold text-[11px] flex items-center justify-center">
-              {isMounted ? todayPlan.length : 0}
+
+            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#C2F800] text-[10px] font-bold text-black sm:text-[11px]">
+              {todayPlan.length}
             </span>
           </Link>
 
           <Link
             href="/my-plan"
-            className="flex items-center gap-1.5 text-[#9CA3AF] hover:text-white transition-colors cursor-pointer py-1 px-2 rounded-md hover:bg-[#111317]"
+            className="flex items-center gap-1 rounded-md px-1.5 py-1 text-[#9CA3AF] transition-colors hover:bg-[#111317] hover:text-white sm:gap-1.5 sm:px-2"
           >
             <span>Saved</span>
-            <span className="w-5 h-5 rounded-full bg-[#1F2937] text-white font-bold text-[11px] flex items-center justify-center border border-[#374151]">
-              {isMounted ? savedPlan.length : 0}
+
+            <span className="flex h-5 w-5 items-center justify-center rounded-full border border-[#374151] bg-[#1F2937] text-[10px] font-bold text-white sm:text-[11px]">
+              {savedPlan.length}
             </span>
           </Link>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <nav className="border-t border-[#1C1F26] bg-[#0D0F12] px-4 py-3 lg:hidden">
+          <div className="flex flex-col gap-2 font-inter">
+            <Link
+              href="/"
+              onClick={() => setMenuOpen(false)}
+              className={`rounded-lg px-4 py-3 text-[13px] transition-colors ${
+                isWorkoutsActive
+                  ? "bg-[#1A2208] font-semibold text-[#C2F800]"
+                  : "text-[#9CA3AF] hover:bg-[#111317] hover:text-white"
+              }`}
+            >
+              Workouts
+            </Link>
+
+            <Link
+              href="/my-plan"
+              onClick={() => setMenuOpen(false)}
+              className={`rounded-lg px-4 py-3 text-[13px] transition-colors ${
+                isMyPlanActive
+                  ? "bg-[#1A2208] font-semibold text-[#C2F800]"
+                  : "text-[#9CA3AF] hover:bg-[#111317] hover:text-white"
+              }`}
+            >
+              My Plan
+            </Link>
+          </div>
+        </nav>
+      )}
     </header>
   );
 };
